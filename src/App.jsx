@@ -7,7 +7,7 @@ const spreadsheets = [
   {name:'Controle de estoque e reposição',desc:'Acompanhamento de entradas, saídas, saldo atual e alerta de reposição por estoque mínimo.',file:'/planilhas/03-controle-estoque.xlsx',tag:'Operações'},
 ];
 const projects = [
-  {n:'01',name:'Meu Assistente',type:'Aplicação web',desc:'Plataforma web de organização e gestão pessoal, com módulos integrados para tarefas, hábitos, estudos, projetos, calendário e objetivos.',stack:'React · JavaScript · Node.js · Vercel',link:'',label:'Projeto pessoal'},
+  {n:'01',name:'Meu Assistente',type:'Aplicação web',desc:'Plataforma web de organização e gestão pessoal, com módulos integrados para tarefas, hábitos, estudos, projetos, calendário e objetivos.',stack:'React · JavaScript · Node.js · Vercel',link:'https://meu-assistente-gc92.vercel.app/',label:'Projeto pessoal'},
   {n:'02',name:'Nexus Tech',type:'E-commerce',desc:'Loja virtual desenvolvida como projeto prático, com catálogo de produtos, páginas de detalhes, carrinho e navegação entre rotas.',stack:'React · JavaScript · CSS · Vercel',link:'https://nexus-tech-nu.vercel.app/',label:'Projeto acadêmico'},
   {n:'03',name:'Grafos e Algoritmos',type:'Iniciação científica',desc:'Estudo e implementação de conceitos de grafos, algoritmos e estruturas de dados, com foco em raciocínio computacional e resolução de problemas.',stack:'Python · Grafos · Algoritmos',link:'',label:'Pesquisa'},
   {n:'04',name:'Análise e Modelagem de Dados',type:'Dados',desc:'Uso de Python para tratamento, exploração e análise de dados, organizando informações para apoiar a interpretação de resultados e a tomada de decisão.',stack:'Python · Análise de dados · Modelagem',link:'',label:'Projeto prático'},
