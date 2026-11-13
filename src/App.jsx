@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import {
   ArrowDown, ArrowUpRight, Github, Linkedin, Mail, Menu, X, Moon, Sun,
   Code2, Database, Monitor, Smartphone, ExternalLink, GraduationCap,
-  BriefcaseBusiness, FolderGit2, Send, CheckCircle2, MapPin
+  BriefcaseBusiness, FolderGit2, Send, CheckCircle2, MapPin, FileSpreadsheet, ChartNoAxesCombined, WalletCards, Receipt, Calculator, ClipboardList
 } from 'lucide-react';
 
 const projects = [
@@ -21,11 +21,11 @@ const projects = [
     link: 'https://nexus-tech-nu.vercel.app/', github: '',
   },
   {
-    title: 'Grafos e Algoritmos', category: 'Iniciação científica', status: 'Iniciação científica',
-    description: 'Estudo e implementação de conceitos de grafos, algoritmos e estruturas de dados, com foco em raciocínio computacional e resolução de problemas.',
-    stack: ['Python', 'Grafos', 'Algoritmos', 'Estruturas de dados'],
+    title: 'Algoritmos e Sistemas Dinâmicos em Grafos', category: 'Iniciação científica', status: 'Iniciação científica • Em andamento',
+    description: 'Pesquisa em teoria dos grafos e sistemas dinâmicos em redes. Envolve implementação em Python de estruturas e algoritmos de grafos (BFS, DFS e Kruskal), construção e análise da matriz Laplaciana e simulações de difusão de calor em uma rede com duas comunidades, utilizando o método de Euler explícito.',
+    stack: ['Python', 'Teoria dos grafos', 'BFS e DFS', 'Kruskal', 'Matriz Laplaciana', 'Simulação numérica'],
     icon: Database, accent: 'orange',
-    link: '', github: '',
+    link: '', github: '', document: '/projetos/relatorio-iniciacao-cientifica.pdf',
   },
   {
     title: 'Análise e Modelagem de Dados', category: 'Dados', status: 'Projeto prático',
@@ -60,7 +60,18 @@ const courses = [
   ['Trilha NoCode/IA e Especialização em Soft Skills', 'Formação complementar', 'Em andamento'],
 ];
 
-const nav = [ ['Início', 'inicio'], ['Sobre', 'sobre'], ['Habilidades', 'habilidades'], ['Projetos', 'projetos'], ['Formação', 'formacao'], ['Contato', 'contato'] ];
+const nav = [ ['Início', 'inicio'], ['Sobre', 'sobre'], ['Habilidades', 'habilidades'], ['Projetos', 'projetos'], ['Planilhas', 'planilhas'], ['Formação', 'formacao'], ['Contato', 'contato'] ];
+
+const spreadsheets = [
+  { title: 'Fluxo de Caixa', file: '04-fluxo-de-caixa.xlsx', desc: 'Entradas, saídas, saldo diário e acumulado, indicadores e gráfico de evolução financeira.', tags: ['Tesouraria', 'Saldo acumulado', 'Gráfico'], icon: WalletCards },
+  { title: 'Contas a Pagar e Receber', file: '02-contas-pagar-receber.xlsx', desc: 'Agenda de vencimentos, valores em aberto, status, atrasos e acompanhamento de recebimentos.', tags: ['Vencimentos', 'Inadimplência', 'Aging'], icon: Receipt },
+  { title: 'Dashboard Gerencial', file: '05-dashboard-gerencial.xlsx', desc: 'Painel executivo com receitas, custos, despesas, resultado, metas e análise mensal.', tags: ['KPIs', 'Metas', 'Indicadores'], icon: ChartNoAxesCombined },
+  { title: 'DRE Gerencial', file: '06-dre-gerencial.xlsx', desc: 'Demonstração simplificada do resultado, lucro bruto, resultado operacional e margens.', tags: ['Receita líquida', 'Lucro', 'Margens'], icon: Calculator },
+  { title: 'Orçamento x Realizado', file: '07-orcamento-vs-realizado.xlsx', desc: 'Comparação do planejado com o realizado, desvios percentuais e comentários de ação.', tags: ['Planejamento', 'Desvios', 'Controle'], icon: ClipboardList },
+  { title: 'Custos e Formação de Preço', file: '08-custos-e-formacao-de-preco.xlsx', desc: 'Composição de custos unitários, margem desejada, preço sugerido e lucro estimado.', tags: ['Custos', 'Precificação', 'Margem'], icon: Calculator },
+  { title: 'Controle Financeiro', file: '01-controle-financeiro.xlsx', desc: 'Organização de receitas e despesas com visão consolidada para acompanhamento financeiro.', tags: ['Receitas', 'Despesas', 'Controle'], icon: FileSpreadsheet },
+  { title: 'Controle de Estoque', file: '03-controle-estoque.xlsx', desc: 'Movimentações, quantidades disponíveis e acompanhamento de estoque.', tags: ['Entradas', 'Saídas', 'Inventário'], icon: ClipboardList },
+];
 
 function App() {
   const [dark, setDark] = useState(() => {
@@ -135,12 +146,18 @@ function App() {
         <section className="section projects-section" id="projetos">
           <div className="section-heading projects-heading"><div><span className="section-index">03 / PROJETOS</span><h2>Ideias colocadas em <span className="accent-text">prática.</span></h2><p className="section-subtitle">Projetos pessoais, acadêmicos e experiências de iniciação científica.</p></div><span className="project-count">0{projects.length} <small>PROJETOS</small></span></div>
           <div className="filters">{filters.map(f => <button key={f} className={filter === f ? 'filter active' : 'filter'} onClick={() => setFilter(f)}>{f}</button>)}</div>
-          <div className="projects-grid">{visibleProjects.map((project, i) => { const Icon = project.icon; return <article className={`project-card ${project.accent}`} key={project.title}><div className="project-art"><div className="project-art-grid"/><div className="project-icon"><Icon size={34}/></div><span className="project-number">0{i+1}</span><span className="project-art-label">{project.category}</span></div><div className="project-body"><div className="project-meta"><span>{project.status}</span><span className="project-dot"/></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.stack.map(t => <span key={t}>{t}</span>)}</div><div className="project-links">{project.link ? <a href={project.link} target="_blank" rel="noreferrer">Ver projeto <ExternalLink size={15}/></a> : <span className="private-label">Projeto em desenvolvimento</span>}{project.github && <a href={project.github} target="_blank" rel="noreferrer">Código <Github size={15}/></a>}</div></div></article> })}</div>
+          <div className="projects-grid">{visibleProjects.map((project, i) => { const Icon = project.icon; return <article className={`project-card ${project.accent}`} key={project.title}><div className="project-art"><div className="project-art-grid"/><div className="project-icon"><Icon size={34}/></div><span className="project-number">0{i+1}</span><span className="project-art-label">{project.category}</span></div><div className="project-body"><div className="project-meta"><span>{project.status}</span><span className="project-dot"/></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.stack.map(t => <span key={t}>{t}</span>)}</div><div className="project-links">{project.link ? <a href={project.link} target="_blank" rel="noreferrer">Ver projeto <ExternalLink size={15}/></a> : <span className="private-label">Projeto em desenvolvimento</span>}{project.github && <a href={project.github} target="_blank" rel="noreferrer">Código <Github size={15}/></a>}{project.document && <a href={project.document} target="_blank" rel="noreferrer">Documento da pesquisa <ExternalLink size={15}/></a>}</div></div></article> })}</div>
           <p className="project-note">* Os projetos sem link público estão apresentados como trabalhos em desenvolvimento ou estudos. Os links de repositório podem ser adicionados quando publicados.</p>
         </section>
 
+        <section className="section spreadsheets-section" id="planilhas">
+          <div className="section-heading projects-heading"><div><span className="section-index">04 / ADMINISTRAÇÃO E CONTABILIDADE</span><h2>Planilhas para <span className="accent-text">gestão na prática.</span></h2><p className="section-subtitle">Modelos em Excel com fórmulas, indicadores, organização visual e exemplos demonstrativos para rotinas administrativas, financeiras e contábeis.</p></div><span className="project-count">08 <small>MODELOS</small></span></div>
+          <div className="spreadsheet-grid">{spreadsheets.map(({title,file,desc,tags,icon:Icon},i)=><article className="spreadsheet-card" key={file}><div className="spreadsheet-card-top"><span className="spreadsheet-icon"><Icon size={21}/></span><span className="spreadsheet-number">0{i+1} / XLSX</span></div><h3>{title}</h3><p>{desc}</p><div className="tags">{tags.map(t=><span key={t}>{t}</span>)}</div><a className="spreadsheet-download" href={`/planilhas/${file}`} download>Baixar planilha <ArrowDown size={15}/></a></article>)}</div>
+          <p className="project-note">Os arquivos incluem dados fictícios de demonstração quando aplicável. Substitua-os por informações reais antes de utilizar. Os modelos são demonstrativos e não substituem validação profissional ou obrigações contábeis oficiais.</p>
+        </section>
+
         <section className="section education-section" id="formacao">
-          <div className="section-heading"><span className="section-index">04 / FORMAÇÃO E EXPERIÊNCIA</span><h2>Uma trajetória entre <span className="accent-text">gestão e tecnologia.</span></h2><p className="section-subtitle">Formação acadêmica, experiência profissional e cursos complementares conforme meu currículo.</p></div>
+          <div className="section-heading"><span className="section-index">05 / FORMAÇÃO E EXPERIÊNCIA</span><h2>Uma trajetória entre <span className="accent-text">gestão e tecnologia.</span></h2><p className="section-subtitle">Formação acadêmica, experiência profissional e cursos complementares conforme meu currículo.</p></div>
           <div className="timeline">
             <div className="timeline-item"><span className="timeline-marker"/><div className="timeline-date">EM ANDAMENTO</div><div className="timeline-content"><div className="timeline-title"><h3>Bacharelado em Ciência da Computação</h3><span className="timeline-tag">Gran Faculdade</span></div><p>Formação superior em andamento.</p></div></div>
             <div className="timeline-item"><span className="timeline-marker"/><div className="timeline-date">EM ANDAMENTO</div><div className="timeline-content"><div className="timeline-title"><h3>Bacharelado em Administração</h3><span className="timeline-tag">Gran Faculdade</span></div><p>Formação superior em andamento.</p></div></div>
@@ -153,7 +170,7 @@ function App() {
           <div className="experience-note"><BriefcaseBusiness size={20}/><div><strong>Colaborador em Gestão Administrativa · POTIFCE</strong><p>Experiência concluída com apoio à gestão de cadastros e ao acompanhamento de inscritos em programa educacional; organização e atualização de documentos e planilhas; suporte operacional e atendimento a estudantes e professores.</p></div></div>
         </section>
 
-        <section className="contact-section" id="contato"><div className="contact-inner"><span className="section-index">05 / CONTATO</span><h2>Vamos construir algo <span className="accent-text">juntos?</span></h2><p>Estou aberto a oportunidades de estágio, projetos colaborativos e conversas sobre tecnologia.</p><div className="contact-grid"><div className="contact-info"><a className="contact-method" href="https://mail.google.com/mail/?view=cm&fs=1&to=Oliveira.santos62%40aluno.ifce.edu.br" target="_blank" rel="noreferrer"><span><Mail/></span><div><small>E-MAIL · ABRIR NO GMAIL</small><strong>Oliveira.santos62@aluno.ifce.edu.br</strong></div><ArrowUpRight/></a><a className="contact-method" href="https://wa.me/5585992003212" target="_blank" rel="noreferrer"><span><Send/></span><div><small>WHATSAPP · ENVIAR MENSAGEM</small><strong>(85) 99200-3212</strong></div><ArrowUpRight/></a><a className="contact-method" href="https://portfolio-gabriel3-d89b.vercel.app/" target="_blank" rel="noreferrer"><span><ExternalLink/></span><div><small>PORTFÓLIO</small><strong>portfolio-gabriel3-d89b.vercel.app</strong></div><ArrowUpRight/></a></div><form className="contact-form" onSubmit={submitContact}><label>Seu nome<input required value={form.nome} onChange={e=>setForm({...form,nome:e.target.value})} placeholder="Como posso te chamar?"/></label><label>Seu e-mail<input required type="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} placeholder="voce@email.com"/></label><label>Mensagem<textarea required rows="4" value={form.mensagem} onChange={e=>setForm({...form,mensagem:e.target.value})} placeholder="Conte um pouco sobre o que você tem em mente..."/></label><button className="button submit-button" type="submit">Enviar mensagem <Send size={16}/></button>{sent && <span className="form-feedback"><CheckCircle2 size={15}/> O Gmail será aberto com a mensagem preenchida. Revise e envie por lá.</span>}</form></div></div></section>
+        <section className="contact-section" id="contato"><div className="contact-inner"><span className="section-index">06 / CONTATO</span><h2>Vamos construir algo <span className="accent-text">juntos?</span></h2><p>Estou aberto a oportunidades de estágio, projetos colaborativos e conversas sobre tecnologia.</p><div className="contact-grid"><div className="contact-info"><a className="contact-method" href="https://mail.google.com/mail/?view=cm&fs=1&to=Oliveira.santos62%40aluno.ifce.edu.br" target="_blank" rel="noreferrer"><span><Mail/></span><div><small>E-MAIL · ABRIR NO GMAIL</small><strong>Oliveira.santos62@aluno.ifce.edu.br</strong></div><ArrowUpRight/></a><a className="contact-method" href="https://wa.me/5585992003212" target="_blank" rel="noreferrer"><span><Send/></span><div><small>WHATSAPP · ENVIAR MENSAGEM</small><strong>(85) 99200-3212</strong></div><ArrowUpRight/></a><a className="contact-method" href="https://portfolio-gabriel3-d89b.vercel.app/" target="_blank" rel="noreferrer"><span><ExternalLink/></span><div><small>PORTFÓLIO</small><strong>portfolio-gabriel3-d89b.vercel.app</strong></div><ArrowUpRight/></a></div><form className="contact-form" onSubmit={submitContact}><label>Seu nome<input required value={form.nome} onChange={e=>setForm({...form,nome:e.target.value})} placeholder="Como posso te chamar?"/></label><label>Seu e-mail<input required type="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} placeholder="voce@email.com"/></label><label>Mensagem<textarea required rows="4" value={form.mensagem} onChange={e=>setForm({...form,mensagem:e.target.value})} placeholder="Conte um pouco sobre o que você tem em mente..."/></label><button className="button submit-button" type="submit">Enviar mensagem <Send size={16}/></button>{sent && <span className="form-feedback"><CheckCircle2 size={15}/> O Gmail será aberto com a mensagem preenchida. Revise e envie por lá.</span>}</form></div></div></section>
       </main>
       <footer className="footer"><a className="brand" href="#inicio"><span className="brand-mark">G<span>.</span></span><span>gabriel<span className="brand-muted">.dev</span></span></a><span>Desenvolvido com React · {new Date().getFullYear()}</span><a href="#inicio" className="back-top">Voltar ao topo ↑</a></footer>
     </div>
