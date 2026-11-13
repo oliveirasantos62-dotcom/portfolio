@@ -1,41 +1,22 @@
-# Portfólio React — Gabriel Oliveira dos Santos
+# Portfólio — Gabriel Oliveira dos Santos
 
-Portfólio responsivo construído com React, Vite e CSS. O conteúdo foi atualizado com base no currículo fornecido.
-
-## Conteúdo
-
-- Resumo profissional: Ciência da Computação, Administração, tecnologia e dados.
-- Formação: Ciência da Computação, Administração e Ciências Contábeis (em andamento, Gran Faculdade); Licenciatura em Matemática (trancada, IFCE).
-- Experiência: Colaborador em Gestão Administrativa no POTIFCE (concluído).
-- Projetos: Meu Assistente, Nexus Tech, Grafos e Algoritmos e Análise e Modelagem de Dados.
-- Competências: JavaScript, Java, Kotlin, HTML, CSS, Python, grafos, algoritmos, estruturas de dados, Excel avançado, Android Studio, Jetpack Compose, Word, PowerPoint, relatórios e dashboards.
-- Cursos complementares: Bootcamp de Ciência de Dados (Avanti), Administração e Contabilidade, Bootcamp de JavaScript, Excel Avançado, Android com Android Studio e Kotlin, trilha NoCode/IA e Soft Skills.
-- Contato por e-mail e telefone.
+Portfólio profissional para oportunidades de estágio e posições iniciais em Administração, Ciências Contábeis e Tecnologia.
 
 ## Executar localmente
-
-Requer Node.js LTS.
-
 ```bash
 npm install
 npm run dev
 ```
 
-## Antes de publicar
+## Publicar na Vercel
+1. Envie esta pasta para um repositório GitHub.
+2. Importe o repositório na Vercel.
+3. Framework: Vite; Build Command: `npm run build`; Output Directory: `dist`.
+4. Após a publicação, copie a URL final para o campo de portfólio no currículo.
 
-No arquivo `src/App.jsx`, personalize:
-- Endereço do GitHub e LinkedIn (não foram informados no currículo).
-- Links dos repositórios dos projetos, quando disponíveis.
-- Confira se o endereço de e-mail e telefone continuam corretos.
-- Se desejar, acrescente períodos/datas das formações e cursos. Eles não constavam no currículo fornecido.
+## Personalizações pendentes
+- Inserir URL do LinkedIn e do GitHub na seção de contato.
+- Adicionar link público do projeto Meu Assistente quando estiver publicado.
+- Atualizar a URL do portfólio no currículo após o deploy.
 
-O formulário de contato utiliza `mailto:` e abre o aplicativo de e-mail padrão; não envia mensagens por um servidor.
-
-## Build
-
-```bash
-npm run build
-npm run preview
-```
-
-Na Vercel, selecione Vite, comando `npm run build` e diretório `dist`.
+As planilhas em `public/planilhas` são modelos demonstrativos e usam dados fictícios.
