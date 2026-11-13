@@ -197,56 +197,104 @@ const spreadsheets = [
   {
     title: 'Fluxo de Caixa',
     file: '04-fluxo-de-caixa.xlsx',
-    desc: 'Entradas, saídas, saldo diário e acumulado, indicadores e gráfico de evolução financeira.',
-    tags: ['Tesouraria', 'Saldo acumulado', 'Gráfico'],
+    desc: 'Controle das entradas, saídas e disponibilidade financeira da empresa.',
+    context:
+      'Pensada para pequenos e médios negócios que precisam acompanhar diariamente suas movimentações financeiras e planejar a disponibilidade de recursos.',
+    problem:
+      'A falta de acompanhamento do dinheiro que entra e sai pode provocar dificuldades para pagar compromissos, identificar períodos de baixa liquidez e planejar investimentos.',
+    solution:
+      'Centraliza entradas e saídas, calcula o saldo diário e acumulado e apresenta indicadores e gráficos para facilitar o acompanhamento financeiro e a tomada de decisões.',
+    tags: ['Tesouraria', 'Saldo acumulado', 'Gráficos'],
     icon: WalletCards,
   },
   {
     title: 'Contas a Pagar e Receber',
     file: '02-contas-pagar-receber.xlsx',
-    desc: 'Agenda de vencimentos, valores em aberto, status, atrasos e acompanhamento de recebimentos.',
-    tags: ['Vencimentos', 'Inadimplência', 'Aging'],
+    desc: 'Gestão de compromissos financeiros, recebimentos e valores pendentes.',
+    context:
+      'Pensada para empresas que realizam vendas a prazo, possuem fornecedores e precisam controlar seus compromissos financeiros.',
+    problem:
+      'A ausência de um controle centralizado pode causar pagamentos atrasados, juros, esquecimentos de vencimentos e aumento da inadimplência.',
+    solution:
+      'Organiza contas a pagar e receber, datas de vencimento, valores, status e atrasos, permitindo acompanhar obrigações e recebimentos com maior precisão.',
+    tags: ['Vencimentos', 'Inadimplência', 'Contas em aberto'],
     icon: Receipt,
   },
   {
     title: 'Dashboard Gerencial',
     file: '05-dashboard-gerencial.xlsx',
-    desc: 'Painel executivo com receitas, custos, despesas, resultado, metas e análise mensal.',
-    tags: ['KPIs', 'Metas', 'Indicadores'],
+    desc: 'Painel visual com indicadores financeiros e operacionais para gestão empresarial.',
+    context:
+      'Pensado para gestores e profissionais administrativos que precisam acompanhar o desempenho da empresa de maneira rápida e consolidada.',
+    problem:
+      'Informações dispersas em diferentes planilhas dificultam a interpretação dos resultados e tornam mais lenta a identificação de problemas e oportunidades.',
+    solution:
+      'Reúne receitas, custos, despesas, resultados e indicadores em um painel visual com gráficos e métricas que facilitam a análise gerencial.',
+    tags: ['KPIs', 'Indicadores', 'Dashboard'],
     icon: ChartNoAxesCombined,
   },
   {
     title: 'DRE Gerencial',
     file: '06-dre-gerencial.xlsx',
-    desc: 'Demonstração simplificada do resultado, lucro bruto, resultado operacional e margens.',
+    desc: 'Análise estruturada das receitas, custos, despesas e resultados da empresa.',
+    context:
+      'Pensada para empresas que desejam acompanhar seu desempenho econômico mensal e compreender a composição de seus resultados.',
+    problem:
+      'Observar apenas o faturamento não permite identificar todos os custos e despesas envolvidos na operação nem avaliar corretamente a rentabilidade.',
+    solution:
+      'Organiza receitas, deduções, custos e despesas em uma estrutura gerencial, permitindo visualizar lucro bruto, resultado operacional e margens.',
     tags: ['Receita líquida', 'Lucro', 'Margens'],
     icon: Calculator,
   },
   {
     title: 'Orçamento x Realizado',
     file: '07-orcamento-vs-realizado.xlsx',
-    desc: 'Comparação do planejado com o realizado, desvios percentuais e comentários de ação.',
+    desc: 'Comparação entre planejamento financeiro e resultados efetivamente alcançados.',
+    context:
+      'Pensada para departamentos financeiros e administrativos que elaboram orçamentos e precisam acompanhar sua execução.',
+    problem:
+      'Sem comparar o planejado com o realizado, a empresa pode não perceber gastos acima do orçamento ou receitas abaixo das metas.',
+    solution:
+      'Compara valores previstos e realizados, calcula diferenças absolutas e percentuais e permite identificar desvios para orientar ações corretivas.',
     tags: ['Planejamento', 'Desvios', 'Controle'],
     icon: ClipboardList,
   },
   {
     title: 'Custos e Formação de Preço',
     file: '08-custos-e-formacao-de-preco.xlsx',
-    desc: 'Composição de custos unitários, margem desejada, preço sugerido e lucro estimado.',
+    desc: 'Composição de custos e apoio à definição do preço de venda.',
+    context:
+      'Pensada para empresas comerciais e prestadoras de serviços que precisam estabelecer preços considerando seus custos e objetivos de rentabilidade.',
+    problem:
+      'Definir preços sem considerar custos, despesas e margem desejada pode comprometer a competitividade e gerar prejuízos.',
+    solution:
+      'Organiza os componentes dos custos, considera despesas e margem desejada e auxilia no cálculo do preço sugerido e do lucro estimado.',
     tags: ['Custos', 'Precificação', 'Margem'],
     icon: Calculator,
   },
   {
     title: 'Controle Financeiro',
     file: '01-controle-financeiro.xlsx',
-    desc: 'Organização de receitas e despesas com visão consolidada para acompanhamento financeiro.',
-    tags: ['Receitas', 'Despesas', 'Controle'],
+    desc: 'Organização e acompanhamento das movimentações financeiras.',
+    context:
+      'Pensada para profissionais autônomos e pequenos negócios que precisam organizar receitas e despesas em um único ambiente.',
+    problem:
+      'Registros informais e informações financeiras fragmentadas dificultam identificar para onde o dinheiro está indo e quanto realmente sobra.',
+    solution:
+      'Padroniza os lançamentos financeiros, permite classificar receitas e despesas e oferece uma visão consolidada das movimentações.',
+    tags: ['Receitas', 'Despesas', 'Organização'],
     icon: FileSpreadsheet,
   },
   {
     title: 'Controle de Estoque',
     file: '03-controle-estoque.xlsx',
-    desc: 'Movimentações, quantidades disponíveis e acompanhamento de estoque.',
+    desc: 'Acompanhamento das entradas, saídas e quantidades disponíveis de produtos.',
+    context:
+      'Pensada para empresas comerciais que precisam monitorar seus produtos e manter informações atualizadas sobre o estoque.',
+    problem:
+      'A falta de controle pode provocar falta de mercadorias, compras desnecessárias, divergências no inventário e perdas financeiras.',
+    solution:
+      'Registra movimentações de entrada e saída e permite acompanhar quantidades disponíveis, facilitando o planejamento de reposição.',
     tags: ['Entradas', 'Saídas', 'Inventário'],
     icon: ClipboardList,
   },
@@ -692,32 +740,69 @@ function App() {
               08 <small>MODELOS</small>
             </span>
           </div>
+
           <div className='spreadsheet-grid'>
-            {spreadsheets.map(({ title, file, desc, tags, icon: Icon }, i) => (
-              <article className='spreadsheet-card' key={file}>
-                <div className='spreadsheet-card-top'>
-                  <span className='spreadsheet-icon'>
-                    <Icon size={21} />
-                  </span>
-                  <span className='spreadsheet-number'>0{i + 1} / XLSX</span>
-                </div>
-                <h3>{title}</h3>
-                <p>{desc}</p>
-                <div className='tags'>
-                  {tags.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-                <a
-                  className='spreadsheet-download'
-                  href={`/planilhas/${file}`}
-                  download
-                >
-                  Baixar planilha <ArrowDown size={15} />
-                </a>
-              </article>
-            ))}
+            {spreadsheets.map(
+              (
+                {
+                  title,
+                  file,
+                  desc,
+                  context,
+                  problem,
+                  solution,
+                  tags,
+                  icon: Icon,
+                },
+                i,
+              ) => (
+                <article className='spreadsheet-card' key={file}>
+                  <div className='spreadsheet-card-top'>
+                    <span className='spreadsheet-icon'>
+                      <Icon size={21} />
+                    </span>
+                    <span className='spreadsheet-number'>0{i + 1} / XLSX</span>
+                  </div>
+
+                  <h3>{title}</h3>
+
+                  <p className='spreadsheet-desc'>{desc}</p>
+
+                  <div className='spreadsheet-details'>
+                    <div className='spreadsheet-detail'>
+                      <strong>Contexto pensado</strong>
+                      <p>{context}</p>
+                    </div>
+
+                    <div className='spreadsheet-detail'>
+                      <strong>Problema identificado</strong>
+                      <p>{problem}</p>
+                    </div>
+
+                    <div className='spreadsheet-detail'>
+                      <strong>Solução proposta</strong>
+                      <p>{solution}</p>
+                    </div>
+                  </div>
+
+                  <div className='tags'>
+                    {tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+
+                  <a
+                    className='spreadsheet-download'
+                    href={`/planilhas/${file}`}
+                    download
+                  >
+                    Baixar planilha <ArrowDown size={15} />
+                  </a>
+                </article>
+              ),
+            )}
           </div>
+
           <p className='project-note'>
             Os arquivos incluem dados fictícios de demonstração quando
             aplicável. Substitua-os por informações reais antes de utilizar. Os
