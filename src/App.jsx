@@ -26,6 +26,9 @@ import {
   Receipt,
   Calculator,
   ClipboardList,
+  Layers3,
+  Target,
+  FileCheck2,
 } from 'lucide-react';
 
 const projects = [
@@ -131,8 +134,8 @@ const skills = [
     icon: Database,
   },
   {
-    name: 'Excel avançado',
-    level: 'Planilhas e análise',
+    name: 'Excel e modelagem de planilhas',
+    level: 'Fórmulas, controles e indicadores gerenciais',
     group: 'Produtividade',
     icon: Monitor,
   },
@@ -196,6 +199,7 @@ const nav = [
 const spreadsheets = [
   {
     title: 'Fluxo de Caixa',
+    group: 'Financeiro',
     file: '04-fluxo-de-caixa.xlsx',
     desc: 'Controle das entradas, saídas e disponibilidade financeira da empresa.',
     context:
@@ -209,6 +213,7 @@ const spreadsheets = [
   },
   {
     title: 'Contas a Pagar e Receber',
+    group: 'Financeiro',
     file: '02-contas-pagar-receber.xlsx',
     desc: 'Gestão de compromissos financeiros, recebimentos e valores pendentes.',
     context:
@@ -222,6 +227,7 @@ const spreadsheets = [
   },
   {
     title: 'Dashboard Gerencial',
+    group: 'Controladoria',
     file: '05-dashboard-gerencial.xlsx',
     desc: 'Painel visual com indicadores financeiros e operacionais para gestão empresarial.',
     context:
@@ -235,6 +241,7 @@ const spreadsheets = [
   },
   {
     title: 'DRE Gerencial',
+    group: 'Controladoria',
     file: '06-dre-gerencial.xlsx',
     desc: 'Análise estruturada das receitas, custos, despesas e resultados da empresa.',
     context:
@@ -248,6 +255,7 @@ const spreadsheets = [
   },
   {
     title: 'Orçamento x Realizado',
+    group: 'Controladoria',
     file: '07-orcamento-vs-realizado.xlsx',
     desc: 'Comparação entre planejamento financeiro e resultados efetivamente alcançados.',
     context:
@@ -261,6 +269,7 @@ const spreadsheets = [
   },
   {
     title: 'Custos e Formação de Preço',
+    group: 'Precificação',
     file: '08-custos-e-formacao-de-preco.xlsx',
     desc: 'Composição de custos e apoio à definição do preço de venda.',
     context:
@@ -274,6 +283,7 @@ const spreadsheets = [
   },
   {
     title: 'Controle Financeiro',
+    group: 'Financeiro',
     file: '01-controle-financeiro.xlsx',
     desc: 'Organização e acompanhamento das movimentações financeiras.',
     context:
@@ -287,6 +297,7 @@ const spreadsheets = [
   },
   {
     title: 'Controle de Estoque',
+    group: 'Operações',
     file: '03-controle-estoque.xlsx',
     desc: 'Acompanhamento das entradas, saídas e quantidades disponíveis de produtos.',
     context:
@@ -310,6 +321,7 @@ function App() {
   });
   const [menuOpen, setMenuOpen] = useState(false);
   const [filter, setFilter] = useState('Todos');
+  const [spreadsheetFilter, setSpreadsheetFilter] = useState('Todas');
   const [form, setForm] = useState({ nome: '', email: '', mensagem: '' });
   const [sent, setSent] = useState(false);
   const filters = [
@@ -319,6 +331,11 @@ function App() {
     'Iniciação científica',
     'Dados',
   ];
+  const spreadsheetFilters = ['Todas', 'Financeiro', 'Controladoria', 'Operações', 'Precificação'];
+  const visibleSpreadsheets = useMemo(
+    () => spreadsheetFilter === 'Todas' ? spreadsheets : spreadsheets.filter((item) => item.group === spreadsheetFilter),
+    [spreadsheetFilter],
+  );
   const visibleProjects = useMemo(
     () =>
       filter === 'Todos'
@@ -413,10 +430,10 @@ function App() {
               <span className='accent-text'> | Tecnologia e dados.</span>
             </h2>
             <p className='hero-description'>
-              Estudante de Ciência da Computação e Administração, com
-              experiência em apoio à gestão administrativa e interesse em
-              tecnologia, desenvolvimento de sistemas, dados e melhoria de
-              processos.
+              Reúno formação em andamento nas áreas de Computação, Administração
+              e Ciências Contábeis, com experiência em apoio à gestão
+              administrativa. Desenvolvo projetos que conectam tecnologia,
+              organização de dados e melhoria de processos.
             </p>
             <div className='hero-actions'>
               <a className='button' href='#projetos'>
@@ -731,9 +748,9 @@ function App() {
                 <span className='accent-text'>gestão na prática.</span>
               </h2>
               <p className='section-subtitle'>
-                Modelos em Excel com fórmulas, indicadores, organização visual e
-                exemplos demonstrativos para rotinas administrativas,
-                financeiras e contábeis.
+                Uma coleção de ferramentas gerenciais construídas para demonstrar
+                raciocínio analítico, domínio de planilhas e visão de processos
+                administrativos, financeiros e contábeis.
               </p>
             </div>
             <span className='project-count'>
@@ -741,11 +758,23 @@ function App() {
             </span>
           </div>
 
+          <div className='spreadsheet-proof-grid'>
+            <div className='spreadsheet-proof'><span><Layers3 size={18} /></span><strong>8 modelos aplicados</strong><small>Rotinas empresariais do dia a dia</small></div>
+            <div className='spreadsheet-proof'><span><Target size={18} /></span><strong>Indicadores e decisões</strong><small>KPIs, desvios, margens e alertas</small></div>
+            <div className='spreadsheet-proof'><span><FileCheck2 size={18} /></span><strong>Fórmulas automatizadas</strong><small>Validações, cálculos e painéis</small></div>
+          </div>
+          <div className='spreadsheet-toolbar'>
+            <div><strong>Explore os modelos</strong><span>Filtre por área de aplicação</span></div>
+            <div className='spreadsheet-filters' role='group' aria-label='Filtrar planilhas por categoria'>
+              {spreadsheetFilters.map((item) => <button key={item} className={spreadsheetFilter === item ? 'filter active' : 'filter'} onClick={() => setSpreadsheetFilter(item)}>{item}</button>)}
+            </div>
+          </div>
           <div className='spreadsheet-grid'>
-            {spreadsheets.map(
+            {visibleSpreadsheets.map(
               (
                 {
                   title,
+                  group,
                   file,
                   desc,
                   context,
@@ -764,7 +793,7 @@ function App() {
                     <span className='spreadsheet-number'>0{i + 1} / XLSX</span>
                   </div>
 
-                  <h3>{title}</h3>
+                  <div className='spreadsheet-card-heading'><h3>{title}</h3><span>{group}</span></div>
 
                   <p className='spreadsheet-desc'>{desc}</p>
 
@@ -796,7 +825,7 @@ function App() {
                     href={`/planilhas/${file}`}
                     download
                   >
-                    Baixar planilha <ArrowDown size={15} />
+                    Baixar modelo Excel <ArrowDown size={15} />
                   </a>
                 </article>
               ),
@@ -804,10 +833,10 @@ function App() {
           </div>
 
           <p className='project-note'>
-            Os arquivos incluem dados fictícios de demonstração quando
-            aplicável. Substitua-os por informações reais antes de utilizar. Os
-            modelos são demonstrativos e não substituem validação profissional
-            ou obrigações contábeis oficiais.
+            Os arquivos possuem uma aba inicial com instruções, legenda de campos
+            editáveis e explicação de uso. Os dados são fictícios e devem ser
+            substituídos antes de qualquer uso operacional. Os modelos não
+            substituem validação profissional ou obrigações contábeis oficiais.
           </p>
         </section>
 
