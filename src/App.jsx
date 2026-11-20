@@ -77,10 +77,9 @@ const projects = [
     document: '/projetos/relatorio-iniciacao-cientifica.pdf',
     extraDocuments: [
       {
-        label: 'Apresentação revisada',
+        label: 'Apresentação',
         file: '/projetos/apresentacao-ic-revisada.pptx',
       },
-      { label: 'Revisão complementar', file: '/projetos/revisao-ic.pdf' },
     ],
   },
   {
