@@ -75,6 +75,13 @@ const projects = [
     link: '',
     github: '',
     document: '/projetos/relatorio-iniciacao-cientifica.pdf',
+    extraDocuments: [
+      {
+        label: 'Apresentação revisada',
+        file: '/projetos/apresentacao-ic-revisada.pptx',
+      },
+      { label: 'Revisão complementar', file: '/projetos/revisao-ic.pdf' },
+    ],
   },
   {
     title: 'Análise e Modelagem de Dados',
@@ -332,9 +339,18 @@ function App() {
     'Iniciação científica',
     'Dados',
   ];
-  const spreadsheetFilters = ['Todas', 'Financeiro', 'Controladoria', 'Operações', 'Precificação'];
+  const spreadsheetFilters = [
+    'Todas',
+    'Financeiro',
+    'Controladoria',
+    'Operações',
+    'Precificação',
+  ];
   const visibleSpreadsheets = useMemo(
-    () => spreadsheetFilter === 'Todas' ? spreadsheets : spreadsheets.filter((item) => item.group === spreadsheetFilter),
+    () =>
+      spreadsheetFilter === 'Todas'
+        ? spreadsheets
+        : spreadsheets.filter((item) => item.group === spreadsheetFilter),
     [spreadsheetFilter],
   );
   const visibleProjects = useMemo(
@@ -722,9 +738,14 @@ function App() {
                           target='_blank'
                           rel='noreferrer'
                         >
-                          Documento da pesquisa <ExternalLink size={15} />
+                          Baixar relatório <ExternalLink size={15} />
                         </a>
                       )}
+                      {project.extraDocuments?.map((doc) => (
+                        <a key={doc.file} href={doc.file} download>
+                          {doc.label} <ExternalLink size={15} />
+                        </a>
+                      ))}
                     </div>
                   </div>
                 </article>
@@ -742,50 +763,222 @@ function App() {
           <div className='section-heading projects-heading'>
             <div>
               <span className='section-index'>04 / BUSINESS INTELLIGENCE</span>
-              <h2>Dados que contam <span className='accent-text'>histórias.</span></h2>
-              <p className='section-subtitle'>Estudos de caso de dashboards com foco em análise, visualização e apoio à decisão. Os painéis abaixo usam dados demonstrativos e representam protótipos de projetos Power BI.</p>
+              <h2>
+                Dados que contam <span className='accent-text'>histórias.</span>
+              </h2>
+              <p className='section-subtitle'>
+                Estudos de caso de dashboards com foco em análise, visualização
+                e apoio à decisão. Os painéis abaixo usam dados demonstrativos e
+                representam protótipos de projetos Power BI.
+              </p>
             </div>
-            <span className='project-count'>03 <small>PAINÉIS</small></span>
+            <span className='project-count'>
+              03 <small>PAINÉIS</small>
+            </span>
           </div>
           <div className='bi-grid'>
             <article className='bi-card'>
-              <div className='bi-card-head'><div><span className='bi-label'>ESTUDO DE CASO · VENDAS</span><h3>Performance Comercial</h3></div><span className='bi-mark'>BI</span></div>
-              <p>Receita, margem, evolução mensal e desempenho por categoria e região.</p>
+              <div className='bi-card-head'>
+                <div>
+                  <span className='bi-label'>ESTUDO DE CASO · VENDAS</span>
+                  <h3>Performance Comercial</h3>
+                </div>
+                <span className='bi-mark'>BI</span>
+              </div>
+              <p>
+                Receita, margem, evolução mensal e desempenho por categoria e
+                região.
+              </p>
               <div className='bi-dashboard sales-dashboard'>
-                <div className='bi-kpis'><div><small>Receita</small><strong>R$ 482 mil</strong><em>+12,8%</em></div><div><small>Pedidos</small><strong>1.284</strong><em>+8,2%</em></div><div><small>Margem</small><strong>31,4%</strong><em>+2,1 p.p.</em></div></div>
-                <div className='bi-chart-title'>Receita mensal <small>Jan — Jun</small></div>
-                <div className='bi-bars'>{[42,58,49,75,66,92].map((h,i)=><div className='bi-bar-col' key={i}><span style={{height:`${h}%`}}/><small>{['J','F','M','A','M','J'][i]}</small></div>)}</div>
-                <div className='bi-legend'><span/><small>Receita (dados fictícios)</small></div>
+                <div className='bi-kpis'>
+                  <div>
+                    <small>Receita</small>
+                    <strong>R$ 482 mil</strong>
+                    <em>+12,8%</em>
+                  </div>
+                  <div>
+                    <small>Pedidos</small>
+                    <strong>1.284</strong>
+                    <em>+8,2%</em>
+                  </div>
+                  <div>
+                    <small>Margem</small>
+                    <strong>31,4%</strong>
+                    <em>+2,1 p.p.</em>
+                  </div>
+                </div>
+                <div className='bi-chart-title'>
+                  Receita mensal <small>Jan — Jun</small>
+                </div>
+                <div className='bi-bars'>
+                  {[42, 58, 49, 75, 66, 92].map((h, i) => (
+                    <div className='bi-bar-col' key={i}>
+                      <span style={{ height: `${h}%` }} />
+                      <small>{['J', 'F', 'M', 'A', 'M', 'J'][i]}</small>
+                    </div>
+                  ))}
+                </div>
+                <div className='bi-legend'>
+                  <span />
+                  <small>Receita (dados fictícios)</small>
+                </div>
               </div>
-              <div className='bi-tags'><span>Power BI</span><span>DAX</span><span>KPIs</span><span>Vendas</span></div>
-              <div className='bi-case-note'><strong>Pergunta de negócio</strong><span>Quais categorias e períodos impulsionam receita e margem?</span></div>
+              <div className='bi-tags'>
+                <span>Power BI</span>
+                <span>DAX</span>
+                <span>KPIs</span>
+                <span>Vendas</span>
+              </div>
+              <div className='bi-case-note'>
+                <strong>Pergunta de negócio</strong>
+                <span>
+                  Quais categorias e períodos impulsionam receita e margem?
+                </span>
+              </div>
             </article>
             <article className='bi-card'>
-              <div className='bi-card-head'><div><span className='bi-label'>ESTUDO DE CASO · FINANÇAS</span><h3>Visão Financeira</h3></div><span className='bi-mark'>BI</span></div>
-              <p>Comparação entre receitas, despesas, resultado e orçamento planejado.</p>
+              <div className='bi-card-head'>
+                <div>
+                  <span className='bi-label'>ESTUDO DE CASO · FINANÇAS</span>
+                  <h3>Visão Financeira</h3>
+                </div>
+                <span className='bi-mark'>BI</span>
+              </div>
+              <p>
+                Comparação entre receitas, despesas, resultado e orçamento
+                planejado.
+              </p>
               <div className='bi-dashboard finance-dashboard'>
-                <div className='bi-kpis'><div><small>Receita</small><strong>R$ 320 mil</strong><em>no período</em></div><div><small>Despesas</small><strong>R$ 218 mil</strong><em>68,1% receita</em></div><div><small>Resultado</small><strong>R$ 102 mil</strong><em>31,9% margem</em></div></div>
-                <div className='bi-chart-title'>Receita x despesas <small>6 meses</small></div>
-                <div className='bi-lines'><div className='bi-line-revenue'/><div className='bi-line-cost'/></div>
-                <div className='bi-legend'><span/><small>Receita</small><span className='legend-cost'/><small>Despesas</small></div>
+                <div className='bi-kpis'>
+                  <div>
+                    <small>Receita</small>
+                    <strong>R$ 320 mil</strong>
+                    <em>no período</em>
+                  </div>
+                  <div>
+                    <small>Despesas</small>
+                    <strong>R$ 218 mil</strong>
+                    <em>68,1% receita</em>
+                  </div>
+                  <div>
+                    <small>Resultado</small>
+                    <strong>R$ 102 mil</strong>
+                    <em>31,9% margem</em>
+                  </div>
+                </div>
+                <div className='bi-chart-title'>
+                  Receita x despesas <small>6 meses</small>
+                </div>
+                <div className='bi-lines'>
+                  <div className='bi-line-revenue' />
+                  <div className='bi-line-cost' />
+                </div>
+                <div className='bi-legend'>
+                  <span />
+                  <small>Receita</small>
+                  <span className='legend-cost' />
+                  <small>Despesas</small>
+                </div>
               </div>
-              <div className='bi-tags'><span>Power BI</span><span>DAX</span><span>Financeiro</span><span>Orçamento</span></div>
-              <div className='bi-case-note'><strong>Pergunta de negócio</strong><span>Como o resultado está evoluindo e onde estão os desvios?</span></div>
+              <div className='bi-tags'>
+                <span>Power BI</span>
+                <span>DAX</span>
+                <span>Financeiro</span>
+                <span>Orçamento</span>
+              </div>
+              <div className='bi-case-note'>
+                <strong>Pergunta de negócio</strong>
+                <span>
+                  Como o resultado está evoluindo e onde estão os desvios?
+                </span>
+              </div>
             </article>
             <article className='bi-card'>
-              <div className='bi-card-head'><div><span className='bi-label'>ESTUDO DE CASO · OPERAÇÕES</span><h3>Estoque & Operações</h3></div><span className='bi-mark'>BI</span></div>
-              <p>Estoque, giro, itens críticos, níveis de cobertura e eficiência operacional.</p>
-              <div className='bi-dashboard inventory-dashboard'>
-                <div className='bi-kpis'><div><small>Itens ativos</small><strong>248</strong><em>catalogados</em></div><div><small>Baixo estoque</small><strong>17</strong><em className='bi-alert'>atenção</em></div><div><small>Giro médio</small><strong>4,6x</strong><em>no período</em></div></div>
-                <div className='bi-chart-title'>Status de estoque</div>
-                <div className='bi-stock-bars'><div><span>Saudável</span><i style={{width:'72%'}}/></div><div><span>Atenção</span><i style={{width:'20%'}}/></div><div><span>Crítico</span><i style={{width:'8%'}}/></div></div>
-                <div className='bi-stock-summary'><span>72% <small>saudável</small></span><span>20% <small>atenção</small></span><span>8% <small>crítico</small></span></div>
+              <div className='bi-card-head'>
+                <div>
+                  <span className='bi-label'>ESTUDO DE CASO · OPERAÇÕES</span>
+                  <h3>Estoque & Operações</h3>
+                </div>
+                <span className='bi-mark'>BI</span>
               </div>
-              <div className='bi-tags'><span>Power BI</span><span>Modelagem</span><span>Operações</span><span>Indicadores</span></div>
-              <div className='bi-case-note'><strong>Pergunta de negócio</strong><span>Quais produtos exigem reposição ou revisão de compra?</span></div>
+              <p>
+                Estoque, giro, itens críticos, níveis de cobertura e eficiência
+                operacional.
+              </p>
+              <div className='bi-dashboard inventory-dashboard'>
+                <div className='bi-kpis'>
+                  <div>
+                    <small>Itens ativos</small>
+                    <strong>248</strong>
+                    <em>catalogados</em>
+                  </div>
+                  <div>
+                    <small>Baixo estoque</small>
+                    <strong>17</strong>
+                    <em className='bi-alert'>atenção</em>
+                  </div>
+                  <div>
+                    <small>Giro médio</small>
+                    <strong>4,6x</strong>
+                    <em>no período</em>
+                  </div>
+                </div>
+                <div className='bi-chart-title'>Status de estoque</div>
+                <div className='bi-stock-bars'>
+                  <div>
+                    <span>Saudável</span>
+                    <i style={{ width: '72%' }} />
+                  </div>
+                  <div>
+                    <span>Atenção</span>
+                    <i style={{ width: '20%' }} />
+                  </div>
+                  <div>
+                    <span>Crítico</span>
+                    <i style={{ width: '8%' }} />
+                  </div>
+                </div>
+                <div className='bi-stock-summary'>
+                  <span>
+                    72% <small>saudável</small>
+                  </span>
+                  <span>
+                    20% <small>atenção</small>
+                  </span>
+                  <span>
+                    8% <small>crítico</small>
+                  </span>
+                </div>
+              </div>
+              <div className='bi-tags'>
+                <span>Power BI</span>
+                <span>Modelagem</span>
+                <span>Operações</span>
+                <span>Indicadores</span>
+              </div>
+              <div className='bi-case-note'>
+                <strong>Pergunta de negócio</strong>
+                <span>
+                  Quais produtos exigem reposição ou revisão de compra?
+                </span>
+              </div>
             </article>
           </div>
-          <p className='project-note'>Visualizações demonstrativas com números fictícios — não são relatórios publicados nem capturas do Power BI. Os projetos podem evoluir para arquivos PBIX e relatórios interativos publicados.</p>
+          <p className='project-note'>
+            Visualizações demonstrativas com números fictícios — não são
+            relatórios publicados nem capturas do Power BI. Os projetos podem
+            evoluir para arquivos PBIX e relatórios interativos publicados.
+          </p>
+          <div className='bi-download'>
+            <a
+              className='text-link'
+              href='/powerbi/PowerBI_Datasets_Portfolio.zip'
+              download
+            >
+              Baixar datasets dos estudos de caso (CSV + guia){' '}
+              <ExternalLink size={16} />
+            </a>
+          </div>
         </section>
 
         <section className='section spreadsheets-section' id='planilhas'>
@@ -799,9 +992,9 @@ function App() {
                 <span className='accent-text'>gestão na prática.</span>
               </h2>
               <p className='section-subtitle'>
-                Uma coleção de ferramentas gerenciais construídas para demonstrar
-                raciocínio analítico, domínio de planilhas e visão de processos
-                administrativos, financeiros e contábeis.
+                Uma coleção de ferramentas gerenciais construídas para
+                demonstrar raciocínio analítico, domínio de planilhas e visão de
+                processos administrativos, financeiros e contábeis.
               </p>
             </div>
             <span className='project-count'>
@@ -810,14 +1003,49 @@ function App() {
           </div>
 
           <div className='spreadsheet-proof-grid'>
-            <div className='spreadsheet-proof'><span><Layers3 size={18} /></span><strong>8 modelos aplicados</strong><small>Rotinas empresariais do dia a dia</small></div>
-            <div className='spreadsheet-proof'><span><Target size={18} /></span><strong>Indicadores e decisões</strong><small>KPIs, desvios, margens e alertas</small></div>
-            <div className='spreadsheet-proof'><span><FileCheck2 size={18} /></span><strong>Fórmulas automatizadas</strong><small>Validações, cálculos e painéis</small></div>
+            <div className='spreadsheet-proof'>
+              <span>
+                <Layers3 size={18} />
+              </span>
+              <strong>8 modelos aplicados</strong>
+              <small>Rotinas empresariais do dia a dia</small>
+            </div>
+            <div className='spreadsheet-proof'>
+              <span>
+                <Target size={18} />
+              </span>
+              <strong>Indicadores e decisões</strong>
+              <small>KPIs, desvios, margens e alertas</small>
+            </div>
+            <div className='spreadsheet-proof'>
+              <span>
+                <FileCheck2 size={18} />
+              </span>
+              <strong>Fórmulas automatizadas</strong>
+              <small>Validações, cálculos e painéis</small>
+            </div>
           </div>
           <div className='spreadsheet-toolbar'>
-            <div><strong>Explore os modelos</strong><span>Filtre por área de aplicação</span></div>
-            <div className='spreadsheet-filters' role='group' aria-label='Filtrar planilhas por categoria'>
-              {spreadsheetFilters.map((item) => <button key={item} className={spreadsheetFilter === item ? 'filter active' : 'filter'} onClick={() => setSpreadsheetFilter(item)}>{item}</button>)}
+            <div>
+              <strong>Explore os modelos</strong>
+              <span>Filtre por área de aplicação</span>
+            </div>
+            <div
+              className='spreadsheet-filters'
+              role='group'
+              aria-label='Filtrar planilhas por categoria'
+            >
+              {spreadsheetFilters.map((item) => (
+                <button
+                  key={item}
+                  className={
+                    spreadsheetFilter === item ? 'filter active' : 'filter'
+                  }
+                  onClick={() => setSpreadsheetFilter(item)}
+                >
+                  {item}
+                </button>
+              ))}
             </div>
           </div>
           <div className='spreadsheet-grid'>
@@ -844,7 +1072,10 @@ function App() {
                     <span className='spreadsheet-number'>0{i + 1} / XLSX</span>
                   </div>
 
-                  <div className='spreadsheet-card-heading'><h3>{title}</h3><span>{group}</span></div>
+                  <div className='spreadsheet-card-heading'>
+                    <h3>{title}</h3>
+                    <span>{group}</span>
+                  </div>
 
                   <p className='spreadsheet-desc'>{desc}</p>
 
@@ -884,9 +1115,9 @@ function App() {
           </div>
 
           <p className='project-note'>
-            Os arquivos possuem uma aba inicial com instruções, legenda de campos
-            editáveis e explicação de uso. Os dados são fictícios e devem ser
-            substituídos antes de qualquer uso operacional. Os modelos não
+            Os arquivos possuem uma aba inicial com instruções, legenda de
+            campos editáveis e explicação de uso. Os dados são fictícios e devem
+            ser substituídos antes de qualquer uso operacional. Os modelos não
             substituem validação profissional ou obrigações contábeis oficiais.
           </p>
         </section>
