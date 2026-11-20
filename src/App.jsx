@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ArrowDown,
   ArrowUpRight,
@@ -327,6 +327,7 @@ function App() {
     }
   });
   const [menuOpen, setMenuOpen] = useState(false);
+  const [expandedDashboard, setExpandedDashboard] = useState(null);
   const [filter, setFilter] = useState('Todos');
   const [spreadsheetFilter, setSpreadsheetFilter] = useState('Todas');
   const [form, setForm] = useState({ nome: '', email: '', mensagem: '' });
@@ -360,6 +361,19 @@ function App() {
     [filter],
   );
 
+  useEffect(() => {
+    if (!expandedDashboard) return;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setExpandedDashboard(null);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [expandedDashboard]);
+
   const toggleTheme = () =>
     setDark((current) => {
       const next = !current;
@@ -385,6 +399,29 @@ function App() {
 
   return (
     <div className={dark ? 'app dark' : 'app light'}>
+
+      <style>{`
+        .bi-card-expandable { cursor: zoom-in; transition: transform .2s ease, border-color .2s ease; }
+        .bi-card-expandable:hover { transform: translateY(-3px); }
+        .bi-modal-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(3,7,18,.82); backdrop-filter: blur(8px); display:flex; align-items:center; justify-content:center; padding:24px; overflow:auto; }
+        .bi-modal { position:relative; width:min(1100px,96vw); max-height:94vh; overflow:auto; padding:clamp(22px,4vw,42px); border:1px solid var(--border,rgba(130,150,190,.25)); border-radius:24px; background:var(--card, #101827); color:inherit; box-shadow:0 30px 100px rgba(0,0,0,.5); animation:biModalIn .22s ease-out; }
+        .bi-modal-close { position:sticky; float:right; top:0; display:flex; align-items:center; justify-content:center; width:42px;height:42px; border-radius:12px; border:1px solid rgba(150,170,200,.25); background:rgba(130,150,190,.1);color:inherit;cursor:pointer;z-index:2; }
+        .bi-modal-header h2 { margin:12px 0 8px; font-size:clamp(24px,4vw,36px); }
+        .bi-modal-header p { opacity:.72; }
+        .bi-modal-dashboard { margin-top:24px; padding:clamp(16px,3vw,30px); border:1px solid rgba(150,170,200,.2); border-radius:18px; background:rgba(5,12,25,.35); }
+        .bi-modal-dashboard .bi-kpis { gap:18px; }
+        .bi-modal-dashboard .bi-kpis>div { padding:20px; }
+        .bi-modal-dashboard .bi-kpis strong { font-size:clamp(20px,3vw,32px); }
+        .bi-modal-bars { height:300px; }
+        .bi-modal-finance-chart { position:relative;height:clamp(220px,38vh,360px); margin-top:20px; border-bottom:1px solid rgba(150,170,200,.25); }
+        .bi-modal-finance-chart svg { position:absolute; inset:0;width:100%;height:100%; }
+        .bi-modal-gridlines { position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 24%,rgba(130,150,190,.14) 25%,transparent 26%); }
+        .bi-modal-months { display:flex;justify-content:space-between;margin:8px 0 18px;opacity:.7;font-size:12px; }
+        .bi-modal-footer { margin-top:20px; opacity:.65;font-size:13px; }
+        .bi-modal-footer kbd { border:1px solid rgba(150,170,200,.3);border-radius:5px;padding:3px 7px; }
+        @keyframes biModalIn { from {opacity:0;transform:scale(.97) translateY(12px)} to {opacity:1;transform:scale(1) translateY(0)} }
+        @media(max-width:600px) { .bi-modal-overlay {padding:8px;} .bi-modal {width:100%;max-height:98vh;padding:18px;border-radius:16px;} .bi-modal-dashboard .bi-kpis {grid-template-columns:1fr;} .bi-modal-bars {height:220px;} }
+      `}</style>
       <header className='header'>
         <a className='brand' href='#inicio' aria-label='Ir para o início'>
           <span className='brand-mark'>
@@ -776,7 +813,7 @@ function App() {
             </span>
           </div>
           <div className='bi-grid'>
-            <article className='bi-card'>
+            <article className='bi-card bi-card-expandable' role='button' tabIndex={0} onClick={() => setExpandedDashboard('sales')} onKeyDown={(e) => e.key === 'Enter' && setExpandedDashboard('sales')} aria-label='Expandir dashboard Performance Comercial'>
               <div className='bi-card-head'>
                 <div>
                   <span className='bi-label'>ESTUDO DE CASO · VENDAS</span>
@@ -835,7 +872,7 @@ function App() {
                 </span>
               </div>
             </article>
-            <article className='bi-card'>
+            <article className='bi-card bi-card-expandable' role='button' tabIndex={0} onClick={() => setExpandedDashboard('finance')} onKeyDown={(e) => e.key === 'Enter' && setExpandedDashboard('finance')} aria-label='Expandir dashboard Visão Financeira'>
               <div className='bi-card-head'>
                 <div>
                   <span className='bi-label'>ESTUDO DE CASO · FINANÇAS</span>
@@ -892,7 +929,7 @@ function App() {
                 </span>
               </div>
             </article>
-            <article className='bi-card'>
+            <article className='bi-card bi-card-expandable' role='button' tabIndex={0} onClick={() => setExpandedDashboard('inventory')} onKeyDown={(e) => e.key === 'Enter' && setExpandedDashboard('inventory')} aria-label='Expandir dashboard Estoque e Operações'>
               <div className='bi-card-head'>
                 <div>
                   <span className='bi-label'>ESTUDO DE CASO · OPERAÇÕES</span>
@@ -1333,6 +1370,39 @@ function App() {
             </div>
           </div>
         </section>
+
+        {expandedDashboard && (
+          <div className='bi-modal-overlay' role='dialog' aria-modal='true' aria-label='Dashboard ampliado' onClick={() => setExpandedDashboard(null)}>
+            <div className='bi-modal' onClick={(e) => e.stopPropagation()}>
+              <button className='bi-modal-close' onClick={() => setExpandedDashboard(null)} aria-label='Fechar dashboard'><X size={24}/></button>
+              <div className='bi-modal-header'>
+                <span className='bi-label'>ESTUDO DE CASO · {expandedDashboard === 'sales' ? 'VENDAS' : expandedDashboard === 'finance' ? 'FINANÇAS' : 'OPERAÇÕES'}</span>
+                <h2>{expandedDashboard === 'sales' ? 'Performance Comercial' : expandedDashboard === 'finance' ? 'Visão Financeira' : 'Estoque & Operações'}</h2>
+                <p>Visualização demonstrativa com dados fictícios.</p>
+              </div>
+              <div className='bi-modal-dashboard'>
+                {expandedDashboard === 'sales' && <>
+                  <div className='bi-kpis'><div><small>Receita</small><strong>R$ 482 mil</strong><em>+12,8%</em></div><div><small>Pedidos</small><strong>1.284</strong><em>+8,2%</em></div><div><small>Margem</small><strong>31,4%</strong><em>+2,1 p.p.</em></div></div>
+                  <div className='bi-chart-title'>Receita mensal <small>Jan — Jun</small></div>
+                  <div className='bi-bars bi-modal-bars'>{[42,58,49,75,66,92].map((h,i)=><div className='bi-bar-col' key={i}><span style={{height:`${h}%`}}/><small>{['Jan','Fev','Mar','Abr','Mai','Jun'][i]}</small></div>)}</div>
+                  <div className='bi-legend'><span/><small>Receita (dados fictícios)</small></div>
+                </>}
+                {expandedDashboard === 'finance' && <>
+                  <div className='bi-kpis'><div><small>Receita</small><strong>R$ 320 mil</strong><em>no período</em></div><div><small>Despesas</small><strong>R$ 218 mil</strong><em>68,1% receita</em></div><div><small>Resultado</small><strong>R$ 102 mil</strong><em>31,9% margem</em></div></div>
+                  <div className='bi-chart-title'>Receita x despesas <small>Jan — Jun</small></div>
+                  <div className='bi-modal-finance-chart'><div className='bi-modal-gridlines'/><svg viewBox='0 0 800 280' preserveAspectRatio='none' aria-label='Gráfico de receita e despesas'><polyline points='0,190 160,125 320,145 480,75 640,95 800,35' fill='none' stroke='#8b72ff' strokeWidth='4' strokeLinecap='round' strokeLinejoin='round'/><polyline points='0,230 160,185 320,200 480,160 640,170 800,145' fill='none' stroke='#45d3c5' strokeWidth='4' strokeLinecap='round' strokeLinejoin='round'/></svg></div>
+                  <div className='bi-modal-months'><span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span><span>Mai</span><span>Jun</span></div>
+                  <div className='bi-legend'><span/><small>Receita</small><span className='legend-cost'/><small>Despesas</small></div>
+                </>}
+                {expandedDashboard === 'inventory' && <>
+                  <div className='bi-kpis'><div><small>Itens ativos</small><strong>248</strong><em>catalogados</em></div><div><small>Baixo estoque</small><strong>17</strong><em className='bi-alert'>atenção</em></div><div><small>Giro médio</small><strong>4,6x</strong><em>no período</em></div></div>
+                  <div className='bi-chart-title'>Status de estoque</div><div className='bi-stock-bars'><div><span>Saudável</span><i style={{width:'72%'}}/></div><div><span>Atenção</span><i style={{width:'20%'}}/></div><div><span>Crítico</span><i style={{width:'8%'}}/></div></div><div className='bi-stock-summary'><span>72% <small>saudável</small></span><span>20% <small>atenção</small></span><span>8% <small>crítico</small></span></div>
+                </>}
+              </div>
+              <div className='bi-modal-footer'>Clique fora do painel ou pressione <kbd>Esc</kbd> para fechar.</div>
+            </div>
+          </div>
+        )}
       </main>
       <footer className='footer'>
         <a className='brand' href='#inicio'>
