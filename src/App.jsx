@@ -191,6 +191,7 @@ const nav = [
   ['Sobre', 'sobre'],
   ['Habilidades', 'habilidades'],
   ['Projetos', 'projetos'],
+  ['Dashboards', 'dashboards'],
   ['Planilhas', 'planilhas'],
   ['Formação', 'formacao'],
   ['Contato', 'contato'],
@@ -737,11 +738,61 @@ function App() {
           </p>
         </section>
 
+        <section className='section powerbi-section' id='dashboards'>
+          <div className='section-heading projects-heading'>
+            <div>
+              <span className='section-index'>04 / BUSINESS INTELLIGENCE</span>
+              <h2>Dados que contam <span className='accent-text'>histórias.</span></h2>
+              <p className='section-subtitle'>Estudos de caso de dashboards com foco em análise, visualização e apoio à decisão. Os painéis abaixo usam dados demonstrativos e representam protótipos de projetos Power BI.</p>
+            </div>
+            <span className='project-count'>03 <small>PAINÉIS</small></span>
+          </div>
+          <div className='bi-grid'>
+            <article className='bi-card'>
+              <div className='bi-card-head'><div><span className='bi-label'>ESTUDO DE CASO · VENDAS</span><h3>Performance Comercial</h3></div><span className='bi-mark'>BI</span></div>
+              <p>Receita, margem, evolução mensal e desempenho por categoria e região.</p>
+              <div className='bi-dashboard sales-dashboard'>
+                <div className='bi-kpis'><div><small>Receita</small><strong>R$ 482 mil</strong><em>+12,8%</em></div><div><small>Pedidos</small><strong>1.284</strong><em>+8,2%</em></div><div><small>Margem</small><strong>31,4%</strong><em>+2,1 p.p.</em></div></div>
+                <div className='bi-chart-title'>Receita mensal <small>Jan — Jun</small></div>
+                <div className='bi-bars'>{[42,58,49,75,66,92].map((h,i)=><div className='bi-bar-col' key={i}><span style={{height:`${h}%`}}/><small>{['J','F','M','A','M','J'][i]}</small></div>)}</div>
+                <div className='bi-legend'><span/><small>Receita (dados fictícios)</small></div>
+              </div>
+              <div className='bi-tags'><span>Power BI</span><span>DAX</span><span>KPIs</span><span>Vendas</span></div>
+              <div className='bi-case-note'><strong>Pergunta de negócio</strong><span>Quais categorias e períodos impulsionam receita e margem?</span></div>
+            </article>
+            <article className='bi-card'>
+              <div className='bi-card-head'><div><span className='bi-label'>ESTUDO DE CASO · FINANÇAS</span><h3>Visão Financeira</h3></div><span className='bi-mark'>BI</span></div>
+              <p>Comparação entre receitas, despesas, resultado e orçamento planejado.</p>
+              <div className='bi-dashboard finance-dashboard'>
+                <div className='bi-kpis'><div><small>Receita</small><strong>R$ 320 mil</strong><em>no período</em></div><div><small>Despesas</small><strong>R$ 218 mil</strong><em>68,1% receita</em></div><div><small>Resultado</small><strong>R$ 102 mil</strong><em>31,9% margem</em></div></div>
+                <div className='bi-chart-title'>Receita x despesas <small>6 meses</small></div>
+                <div className='bi-lines'><div className='bi-line-revenue'/><div className='bi-line-cost'/></div>
+                <div className='bi-legend'><span/><small>Receita</small><span className='legend-cost'/><small>Despesas</small></div>
+              </div>
+              <div className='bi-tags'><span>Power BI</span><span>DAX</span><span>Financeiro</span><span>Orçamento</span></div>
+              <div className='bi-case-note'><strong>Pergunta de negócio</strong><span>Como o resultado está evoluindo e onde estão os desvios?</span></div>
+            </article>
+            <article className='bi-card'>
+              <div className='bi-card-head'><div><span className='bi-label'>ESTUDO DE CASO · OPERAÇÕES</span><h3>Estoque & Operações</h3></div><span className='bi-mark'>BI</span></div>
+              <p>Estoque, giro, itens críticos, níveis de cobertura e eficiência operacional.</p>
+              <div className='bi-dashboard inventory-dashboard'>
+                <div className='bi-kpis'><div><small>Itens ativos</small><strong>248</strong><em>catalogados</em></div><div><small>Baixo estoque</small><strong>17</strong><em className='bi-alert'>atenção</em></div><div><small>Giro médio</small><strong>4,6x</strong><em>no período</em></div></div>
+                <div className='bi-chart-title'>Status de estoque</div>
+                <div className='bi-stock-bars'><div><span>Saudável</span><i style={{width:'72%'}}/></div><div><span>Atenção</span><i style={{width:'20%'}}/></div><div><span>Crítico</span><i style={{width:'8%'}}/></div></div>
+                <div className='bi-stock-summary'><span>72% <small>saudável</small></span><span>20% <small>atenção</small></span><span>8% <small>crítico</small></span></div>
+              </div>
+              <div className='bi-tags'><span>Power BI</span><span>Modelagem</span><span>Operações</span><span>Indicadores</span></div>
+              <div className='bi-case-note'><strong>Pergunta de negócio</strong><span>Quais produtos exigem reposição ou revisão de compra?</span></div>
+            </article>
+          </div>
+          <p className='project-note'>Visualizações demonstrativas com números fictícios — não são relatórios publicados nem capturas do Power BI. Os projetos podem evoluir para arquivos PBIX e relatórios interativos publicados.</p>
+        </section>
+
         <section className='section spreadsheets-section' id='planilhas'>
           <div className='section-heading projects-heading'>
             <div>
               <span className='section-index'>
-                04 / ADMINISTRAÇÃO E CONTABILIDADE
+                05 / ADMINISTRAÇÃO E CONTABILIDADE
               </span>
               <h2>
                 Planilhas para{' '}
@@ -842,7 +893,7 @@ function App() {
 
         <section className='section education-section' id='formacao'>
           <div className='section-heading'>
-            <span className='section-index'>05 / FORMAÇÃO E EXPERIÊNCIA</span>
+            <span className='section-index'>06 / FORMAÇÃO E EXPERIÊNCIA</span>
             <h2>
               Uma trajetória entre{' '}
               <span className='accent-text'>gestão e tecnologia.</span>
